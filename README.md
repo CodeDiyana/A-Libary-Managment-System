@@ -4,88 +4,59 @@
 
 
 <h2>Description</h2>
-This project outlines the design and creation of a Book publishing system relational database that covers entity-relationship modelling, SQL table creation, business query design, and normalisation. The system handles books, authors, publishers and warehouses and all the relationships are represented in a normalised schema. To illustrate both theoretical knowledge and practice gained on the concept of relational databases.
-<br />
+Implementation Overview
+The Library management system was created using four classes, Book, Member, StudentMember, TeacherMember and Library which is a representation of all the four pillars of OOP (encapsulation, inheritance, polymorphism and abstraction).
 
 
 
 
-<h2>Program walk-through:</h2>
-:
 
-- <b>Entity–Relationship (ER) modeling</b> 
-- <b>SQL table creation (schema design)</b>
-- <b>Data population and insertion</b> 
-- <b>SQL queries for business insights (e.g., books by author, inventory counts, pricing analysis)</b>
-- <b>Constraints and indexing </b> 
-- <b>Aggregations using GROUP BY and conditional logic with CASE</b>
-- <b>Database normalization practices</b> 
+
+<h2>OOP Concepts Used:</h2>
 
 
 
 
- <b>
-Entity–Relationship (ER) modeling <b>
- <b>SQL table creation (schema design) <b>
- <b>Data population and insertion <b>
- <b>SQL queries for business insights (e.g., books by author, inventory counts, pricing analysis) <b>
- <b>Constraints and indexing <b>
- <b>Aggregations using GROUP BY and conditional logic with CASE <b>
- <b>Database normalization practices <b>
- <b>Database</b> 
 
+
+
+Created classes like Book, Member, and Library to model real-world library entities.
+
+
+
+
+Inheritance & Polymorphism
+
+
+
+
+
+
+Encapsulation & Data Hiding
+
+
+
+
+
+
+
+
+
+
+
+ 
 <h2>Program walk-through:</h2>
 
 
 
 <p align="center">
-ER Diagram:
-The implementation of the type of relationships is achieved in the following way. Publisher and Book have One-to-Many (1:N) relationship whereby there are multiple books published by the same publisher but owned by a separate publisher and publications respect through the publisher using producer as a foreign key in the Book table. Two Many-to-Many (M:N) relations exist with a Book-Author relationship which can resolve using the book_author junction table and is composed of primary key (isbn, author_id); another one between Book and Warehouse including copies attribute 
-to keep track of the number of copies on-site. No One-to-One relationships in this case . There will be a total 
-  of six tables: publisher, author, warehouse, book, book author and book warehouse.
-<br/>
-<img src="https://i.imgur.com/nKjzAWw.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
-
-  <h2>Normalization Practice::</h2>
-
-  <br />
- a) 1NF Check:
-  <br/>All values are atomic (single values per cell). The table satisfies 1NF but has partial and transitive dependencies violating higher normal forms.  <br />
-
-  <br />
- b)Functional Dependencies
-: <br />
-  <br/>Book_ISBN → Book_Title, Publisher_ID, Publisher_Name  
-  <br />Author_ID → Author_Name 
-  <br /> Publisher_ID → Publisher_Name   
-   <br /> (Book_ISBN, Warehouse_Code) → Copies
- <br />
-
-   <br /> c & d) Normalization Steps with Tables
-
- <br />
-<img src="https://i.imgur.com/SSRmpRk.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
-<br />
-2NF — Remove Partial Dependencies (attributes depending on only part of composite key):
-: <br/>
- <br />Book Table:  
- <br/>
-
-<img src="https://i.imgur.com/jTu7IRS.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
-<br />
-3NF — Remove Transitive Dependency (Publisher_Name depends on Publisher_ID, not Book_ISBN):
- <br/>
- <br/>
+<br /> 
+Classes and Objects: Book This is a library resource whose attribute contains a set of information such as an ID, title, author, current borrower and status of availability. Member Library Users Member is the parent of the library users that has a member id, name and an internal array of books borrowed (Alexander, 2022). The central management class is that which keeps collection of books and members in the library.
  
- <br/>
-Publisher Table:
+ <br />Encapsulation and Data Hiding: The Member class has a name-mangled private attribute: The borrowed books which is used to make direct access by the outsider to a borrowing list of the member. The Library class is no exception as it secures its collection of books and members, as well. All access to these private attributes is done via specified public functions like borrow book, return book and access to these attributes is controlled and data integrity is provided. Availability of books is merely the option of these validated procedures instead of the immediate change or manipulation of attributes . 
 
-<img src="https://i.imgur.com/rUhtoA8.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
+<br/> Inheritance and Polymorphism: StudentsMember and TeacherMember inherits UserMember which is extended with role specific attributes. The studentMember has a limit of borrow 3 and student-id, and the TeacherMember has a limit of borrow 10. This hierarchy reflects the real world policies and has different user roles with different borrowing privileges, the polymorphic behaviour is reflected with specialised subclass attributes and share the same borrowing interface with the parent one .<br/>
 
-<img src="https://i.imgur.com/ZY8HiK1.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
+<h2>Disscusion:</h2>
 
+The system plays well in lifecycle management in book borrowing and giving back. Encapsulation is used to make sure that the availability of the books cannot be changed without going through the borrow book and the return book method which consists of validations (e.g. is the book really available before the book is borrowed). The hereditance system is pure and expandable System - It was easy to add other types of members (e.g., GuestMember) into the structure as subclasses of Member without making any changes to the main program, which is in line with the Open/Closed Principle. The system demonstrates how OOP reveals the real-life objects in their inherent state, and how the code is user- and service-friendly.
